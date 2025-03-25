@@ -14,12 +14,29 @@ This guide explains how to deploy a Kubernetes YAML file from a GitHub repositor
 2. In the **Available Plugins** tab, search for `Kubernetes CLI`.
 3. Install the plugin and restart Jenkins.
 
-## Step 2: Configure Kubernetes Credentials in Jenkins
-1. Navigate to **Jenkins Dashboard** → **Manage Jenkins** → **Manage Credentials**.
-2. Click **(global) -> Add Credentials**.
-3. Select **Secret file** and upload your `kubeconfig` file.
-4. Give it an **ID** (e.g., `k8s-kubeconfig`).
-5. Save the credentials.
+## Step 2: Configure Kubernetes Credentials (`admin.conf`) in Jenkins  
+To allow Jenkins to authenticate with Kubernetes, we need to store the `admin.conf` file as a **Secret File** in Jenkins credentials.
+
+### **Step 2.1: Locate the `admin.conf` File**  
+On the **Kubernetes Master Node**, the default kubeconfig file (`admin.conf`) is located at:  
+```sh
+sudo cat /etc/kubernetes/admin.conf
+```
+Copy the entire contents of this file.
+
+### **Step 2.2: Add `admin.conf` as a Secret File in Jenkins**  
+1. Open **Jenkins Dashboard**.  
+2. Go to **Manage Jenkins** → **Manage Credentials**.  
+3. Click **(global) → Add Credentials**.  
+4. Set the following:  
+   - **Kind**: Select **Secret file**.  
+   - **File**: Upload the copied `admin.conf` contents as a file.  
+   - **ID**: Enter a recognizable name (e.g., `k8s-kubeconfig`).  
+   - **Description**: (Optional) Add a note like `"Kubernetes admin.conf for authentication"`.  
+5. Click **OK** to save the credentials.
+
+This will allow Jenkins to use `admin.conf` when executing `kubectl` commands.
+
 
 ## Step 3: Create a Pipeline in Jenkins
 1. Open **Jenkins Dashboard**.
