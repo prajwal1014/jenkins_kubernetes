@@ -58,4 +58,5 @@ kubectl get pods
 kubectl get deployments
 kubectl get services
 ```
+![image](https://github.com/user-attachments/assets/438dd4bb-d6a4-497b-ab06-d3963e411a40)
 ![image](https://github.com/user-attachments/assets/6142b296-9437-44ca-9479-0c57660cdf2f)
