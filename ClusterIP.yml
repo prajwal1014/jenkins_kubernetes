@@ -1,35 +1,33 @@
 ---
-    apiVersion: apps/v1
-    kind: Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flipkart
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flipkart
+  template:
     metadata:
-      name: flipkart
+      labels:
+        app: flipkart
     spec:
-      replicas: 2
-      selector:
-        matchLabels:
-          name: deployment
-      template:
-        metadata:
-          name: signup
-          labels:
-            name: deployment
-        spec:
-          containers:
-            - name: v2
-              image: nginx
-              ports:
-                - containerPort: 80
-    
-    ---
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: flipkartsignup
-    spec:
-      ports:
-        - port: 80
-          targetPort: 80
-      selector:
-        name: deployment
-      type: ClusterIP
-    
+      containers:
+        - name: nginx-container
+          image: nginx
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flipkartsignup
+spec:
+  selector:
+    app: flipkart
+  ports:
+    - port: 80
+      targetPort: 80
+  type: ClusterIP
