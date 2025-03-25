@@ -22,7 +22,7 @@ On the **Kubernetes Master Node**, the default kubeconfig file (`admin.conf`) is
 ```sh
 sudo cat /etc/kubernetes/admin.conf
 ```
-Copy the entire contents of this file.
+Copy the entire contents of this file(as admin.conf/admin.txt in your pc).
 
 ### **Step 2.2: Add `admin.conf` as a Secret File in Jenkins**  
 1. Open **Jenkins Dashboard**.  
@@ -30,7 +30,7 @@ Copy the entire contents of this file.
 3. Click **(global) → Add Credentials**.  
 4. Set the following:  
    - **Kind**: Select **Secret file**.  
-   - **File**: Upload the copied `admin.conf` contents as a file.  
+   - **File**: Upload the copied `admin.conf` contents as a file(admin.conf/admin.txt).  
    - **ID**: Enter a recognizable name (e.g., `k8s-kubeconfig`).  
    - **Description**: (Optional) Add a note like `"Kubernetes admin.conf for authentication"`.  
 5. Click **OK** to save the credentials.
